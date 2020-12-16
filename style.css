@@ -1,0 +1,129 @@
+.keyboard {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
+    background: #ced3d9;
+    user-select: none;
+    transition: bottom 0.5s;
+}
+
+.keyboard-hidden {
+    bottom: -100%;
+}
+
+.keyboard-keys {
+    text-align: center;
+}
+
+.keyboard-key {
+    height: 50px;
+    width: 4%;
+    margin: 3px;
+    border-radius: 4px;
+    border: none;
+    background: #ffffff;
+    color: #070707;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    transition: 0.5s;
+}
+
+.keyboard-smile {
+    height: 20px;
+    width: 2%;
+    margin: 2px;
+    border-radius: 3px;
+    border: none;
+    background: #ffffff;
+    color: #070707;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    transition: 0.5s;
+}
+
+.keyboard-key:hover {
+    opacity: 0.7;
+}
+
+.keyboard-key-wide-top {
+    width: 6%;
+    background: #abb3be;
+}
+.keyboard-key-dark {
+    background: #abb3be;
+    width: 4.5%;
+}
+
+.keyboard-key-small {
+    height: 25px;
+}
+
+.keyboard-key-wide {
+    width: 7.2%;
+    background: #abb3be;
+}
+.keyboard-key-wide-center {
+    width: 7.85%;
+    background: #abb3be;
+}
+.keyboard-key-wide-bottom {
+    width: 10%;
+    background: #abb3be;
+}
+
+.keyboard-key-wide-extra {
+    width: 40%;
+}
+
+.keyboard-key:active {
+    background: #007aff;
+}
+
+.keyboard-key-no-active::after {
+    content: '';
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ced3d9;
+    border-radius: 50%;
+}
+
+.keyboard-key-active::after {
+    background: #ffffff;
+}
+
+.button-left {
+    align-items: flex-end;
+    justify-content: start;
+    padding: 5px;
+}
+
+.button-right {
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.ignore {
+    /* Игнорим капслок */
+}
