@@ -10,11 +10,23 @@
 }
 
 .keyboard-hidden {
-    bottom: -100%;
+    bottom: -110% !important;
 }
 
 .keyboard-keys {
     text-align: center;
+    margin: 0 auto;
+}
+.keyboard-smiles,
+.keyboard-symbols {
+    margin: 0 auto;
+    max-width: 1200px;
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+    background: #abb3bee5;
+    border-radius: 10px;
+    transition: bottom 0.5s;
 }
 
 .keyboard-key {
@@ -40,13 +52,13 @@
 
 .keyboard-smile {
     height: 20px;
-    width: 2%;
-    margin: 2px;
+    width: auto;
+    margin: 5px;
     border-radius: 3px;
     border: none;
-    background: #ffffff;
+    background: transparent;
     color: #070707;
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     outline: none;
     cursor: pointer;
     display: inline-flex;
@@ -54,6 +66,25 @@
     justify-content: center;
     vertical-align: top;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    transition: 0.5s;
+}
+.keyboard-symbol {
+    height: 25px;
+    width: auto;
+    margin: 5px;
+    border-radius: 3px;
+    border: none;
+    background: transparent;
+    color: #070707;
+    font-size: 1.5rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
     -webkit-tap-highlight-color: transparent;
     position: relative;
     transition: 0.5s;
@@ -126,4 +157,49 @@
 
 .ignore {
     /* Игнорим капслок */
+}
+
+@media (max-width: 1600px) {
+    .keyboard-key-dark {
+        width: 4.6%;
+    }
+}
+@media (max-width: 1450px) {
+    .keyboard-key-dark {
+        width: 4.65%;
+    }
+}
+@media (max-width: 1250px) {
+    .keyboard-key-dark {
+        width: 4.7%;
+    }
+}
+@media (max-width: 1150px) {
+    .keyboard-key-dark {
+        width: 4.8%;
+    }
+}
+@media (max-width: 950px) {
+    .keyboard-key-dark {
+        width: 4.9%;
+    }
+}
+@media (max-width: 875px) {
+    .keyboard-key-dark {
+        width: 5%;
+    }
+}
+@media (max-width: 800px) {
+    .keyboard-key-dark {
+        width: 5.1%;
+    }
+}
+@media (max-width: 700px) {
+    .keyboard-key-dark {
+        width: 5.2%;
+    }
+    .keyboard-key {
+        height: 30px;
+        font-size: 0.5rem;
+    }
 }

@@ -1,4 +1,6 @@
 var lang = false;
+var smil = false;
+var symb = false;
 
 const Keyboard = {
     elements: {
@@ -21,16 +23,26 @@ const Keyboard = {
         // Create main elements
         this.elements.main = document.createElement("div");
         this.elements.keysContainer = document.createElement("div");
+        this.elements.smileContainer = document.createElement("div");
+        this.elements.symbolContainer = document.createElement("div");
 
         // Setup main elements
         this.elements.main.classList.add("keyboard", "keyboard-hidden");
         this.elements.keysContainer.classList.add("keyboard-keys");
+        this.elements.smileContainer.classList.add("keyboard-hidden", "keyboard-smiles");
+        this.elements.symbolContainer.classList.add("keyboard-hidden", "keyboard-symbols");
         this.elements.keysContainer.appendChild(this._createKeys());
+        this.elements.smileContainer.appendChild(this._createSmiles());
+        this.elements.symbolContainer.appendChild(this._createSymbols());
 
         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard-key");
+        this.elements.smiles = this.elements.smileContainer.querySelectorAll(".keyboard-smile");
+        this.elements.symbols = this.elements.symbolContainer.querySelectorAll(".keyboard-symbol");
 
         // Add to DOM
         this.elements.main.appendChild(this.elements.keysContainer);
+        this.elements.main.appendChild(this.elements.smileContainer);
+        this.elements.main.appendChild(this.elements.symbolContainer);
         document.body.appendChild(this.elements.main);
 
         // Automatically use keyboard for elements with .use-keyboard-input
@@ -82,12 +94,43 @@ const Keyboard = {
         return fragment;
     },
 
+    _createSymbols() {
+        const fragment = document.createDocumentFragment();
+        var smiles = [];
 
+        smiles = [
+            "`", "~", "!", "@", "#", "$", "%", "^", "&", "*", "№",
+            ";", ":", "?", "(", ")", "_", "+", "-", "=", "/", ",",
+            ".", "[", "]", "{", "}", "<", ">", "©", "®", "™", "‰",
+            "π", "§", "°", "µ", "¶", "‾", "×", "÷", "±", "¬", "≈",
+            "≠", "≡", "√", "∞", "∑", "∏", "∂", "∫", "∀", "€", "¢", 
+            "£", "¤", "¥", "ƒ", "₽", "☃", "❄", "★", "⚝"
+        ];
+        
+        smiles.forEach(key => {
+            const keyElement = document.createElement("button");
+            const insertLineBreak = ["№", ",", "‰", "≈", "¢"].indexOf(key) !== -1;
 
+            // Add attributes/classes
+            keyElement.setAttribute("type", "button");
+            keyElement.classList.add("keyboard-symbol");
 
+            keyElement.textContent = key.toLowerCase();
 
+            keyElement.addEventListener("click", () => {
+                this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                this._triggerEvent("oninput");
+            });
 
+            fragment.appendChild(keyElement);
 
+            if (insertLineBreak) {
+                fragment.appendChild(document.createElement("br"));
+            }
+        });
+
+        return fragment;
+    },
 
     _createKeys() {
         const fragment = document.createDocumentFragment();
@@ -228,18 +271,63 @@ const Keyboard = {
                 case "smile":
                     keyElement.classList.add("keyboard-key-dark", "button-left");
                     keyElement.innerHTML = createIconHTML("sentiment_satisfied_alt");
+
+                    keyElement.addEventListener("click", () => {
+                        switch (smil) {
+                            case true:
+                                this.elements.smileContainer.classList.add("keyboard-hidden");
+                                smil = false;
+                                break;
+                            case false:
+                                this.elements.smileContainer.classList.remove("keyboard-hidden");
+                                smil = true;
+                                break;
+                        }
+                        this.elements.symbolContainer.classList.add("keyboard-hidden");
+                        symb = false;
+                    });
         
                     break;    
 
                 case "number-l":
                     keyElement.classList.add("keyboard-key-dark", "button-left", "ignore");
                     keyElement.textContent = ".?123";
+
+                    keyElement.addEventListener("click", () => {
+                        switch (symb) {
+                            case true:
+                                this.elements.symbolContainer.classList.add("keyboard-hidden");
+                                symb = false;
+                                break;
+                            case false:
+                                this.elements.symbolContainer.classList.remove("keyboard-hidden");
+                                symb = true;
+                                break;
+                        }
+                        this.elements.smileContainer.classList.add("keyboard-hidden");
+                        smil = false;
+                    });
             
                     break; 
                     
                 case "number-r":
                     keyElement.classList.add("keyboard-key-dark", "button-right", "ignore");
                     keyElement.textContent = ".?123";
+
+                    keyElement.addEventListener("click", () => {
+                        switch (symb) {
+                            case true:
+                                this.elements.symbolContainer.classList.add("keyboard-hidden");
+                                symb = false;
+                                break;
+                            case false:
+                                this.elements.symbolContainer.classList.remove("keyboard-hidden");
+                                symb = true;
+                                break;
+                        }
+                        this.elements.smileContainer.classList.add("keyboard-hidden");
+                        smil = false;
+                    });
                 
                     break;
 
@@ -261,6 +349,10 @@ const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
                         this._triggerEvent("oninput");
+                        this.elements.smileContainer.classList.add("keyboard-hidden");
+                        smil = false;
+                        this.elements.symbolContainer.classList.add("keyboard-hidden");
+                        symb = false;
                     });
 
                     break;
