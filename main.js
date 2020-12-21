@@ -1,6 +1,7 @@
 var lang = false;
 var smil = false;
 var symb = false;
+var smileLabel = 0;
 
 const Keyboard = {
     elements: {
@@ -81,6 +82,7 @@ const Keyboard = {
 
             keyElement.addEventListener("click", () => {
                 this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                smileLabel++;
                 this._triggerEvent("oninput");
             });
 
@@ -177,6 +179,10 @@ const Keyboard = {
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                        if ( smileLabel > 0 ) {
+                            this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                            smileLabel--;
+                        }
                         this._triggerEvent("oninput");
                     });
 
@@ -238,13 +244,11 @@ const Keyboard = {
 
                 case "shift":
                     keyElement.classList.add("keyboard-key-wide-bottom", "button-left", "ignore");
-                    keyElement.textContent = key.toLowerCase();
-    
-                    keyElement.addEventListener("mousedown", () => {
-                        this._toggleCapsLock();
-                    });
-                    keyElement.addEventListener("mouseup", () => {
-                        this._toggleCapsLock();
+                    keyElement.textContent = "done";
+
+                    keyElement.addEventListener("click", () => {
+                        this.close();
+                        this._triggerEvent("onclose");
                     });
     
                     break;  
@@ -260,8 +264,6 @@ const Keyboard = {
                         this.elements.keysContainer.remove();
 
                         Keyboard.init();
-                        this.eventHandlers.oninput = oninput;
-                        this.eventHandlers.onclose = onclose;
                         this.elements.main.classList.remove("keyboard-hidden");
                         this._triggerEvent("oninput");
                     });
