@@ -1,9 +1,8 @@
 var lang = false;
 var smil = false;
 var symb = false;
-var smileLabel = 0;
 
-const Keyboard = {
+const Keyboard = { 
     elements: {
         main: null,
         keysContainer: null,
@@ -49,7 +48,7 @@ const Keyboard = {
         // Automatically use keyboard for elements with .use-keyboard-input
         document.querySelectorAll(".keyboard-area").forEach(element => {
             element.addEventListener("focus", () => {
-                this.open(element.value, currentValue => {
+                    this.open(element.value, currentValue => {
                     element.value = currentValue;
                 });
             });
@@ -82,7 +81,6 @@ const Keyboard = {
 
             keyElement.addEventListener("click", () => {
                 this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
-                smileLabel++;
                 this._triggerEvent("oninput");
             });
 
@@ -178,11 +176,22 @@ const Keyboard = {
                     keyElement.textContent = key.toLowerCase();
 
                     keyElement.addEventListener("click", () => {
-                        this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
-                        if ( smileLabel > 0 ) {
-                            this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
-                            smileLabel--;
-                        }
+                    this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                        document.querySelectorAll(".keyboard-area").forEach(delsmile => {
+                            console.log(delsmile.value.slice(-1));
+                            if (delsmile.value.slice(-1).indexOf([
+                                "😀", "😁", "😂", "😃", "😄", "😅", "😆", "😇", "😈", "😉", "😊",
+                                "😌", "😙", "😚", "😛", "😨", "😩", "😪", "😋", "😘", "😧", "😶",
+                                "😍", "😎", "😏", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗",
+                                "😜", "😝", "😞", "😟", "😠", "😡", "😢", "😣", "😤", "😥", "😦",
+                                "😫", "😬", "😭", "😮", "😯", "😰", "😱", "😲", "😳", "😴", "😵", 
+                                "😷", "😸", "😹", "😺", "😻", "😼", "😽", "😾", "🙀", "🙁", "🙂",
+                                "🙄", "🙅", "🙆", "🙇", "🙈", "🙉", "🙊", "🙋", "🙌", "🙍", "🙎", "�"
+                            ]) != 0) {
+                                console.log('Yea!')
+                                this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                            }       
+                        });
                         this._triggerEvent("oninput");
                     });
 
