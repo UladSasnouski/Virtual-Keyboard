@@ -178,16 +178,8 @@ const Keyboard = {
                     keyElement.addEventListener("click", () => {
                     this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
                         document.querySelectorAll(".keyboard-area").forEach(delsmile => {
-                            console.log(delsmile.value.slice(-1));
-                            if (delsmile.value.slice(-1).indexOf([
-                                "😀", "😁", "😂", "😃", "😄", "😅", "😆", "😇", "😈", "😉", "😊",
-                                "😌", "😙", "😚", "😛", "😨", "😩", "😪", "😋", "😘", "😧", "😶",
-                                "😍", "😎", "😏", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗",
-                                "😜", "😝", "😞", "😟", "😠", "😡", "😢", "😣", "😤", "😥", "😦",
-                                "😫", "😬", "😭", "😮", "😯", "😰", "😱", "😲", "😳", "😴", "😵", 
-                                "😷", "😸", "😹", "😺", "😻", "😼", "😽", "😾", "🙀", "🙁", "🙂",
-                                "🙄", "🙅", "🙆", "🙇", "🙈", "🙉", "🙊", "🙋", "🙌", "🙍", "🙎", "�"
-                            ]) != 0) {
+                            console.log(delsmile.value.slice(-1).charCodeAt());
+                            if (delsmile.value.slice(-1).charCodeAt() > 50000) {
                                 console.log('Yea!')
                                 this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
                             }       
